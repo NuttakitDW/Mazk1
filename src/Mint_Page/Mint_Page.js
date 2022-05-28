@@ -102,6 +102,7 @@ function Mint_Page() {
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const [claimingNft, setClaimingNft] = useState(false);
+  const [whitelisted, setWhitelisted] = useState(false);
   const [feedback, setFeedback] = useState(`Click buy to mint your NFT.`);
   const [mintAmount, setMintAmount] = useState(1);
   const [CONFIG, SET_CONFIG] = useState({
@@ -195,6 +196,15 @@ function Mint_Page() {
   useEffect(() => {
     getData();
   }, [blockchain.account]);
+
+  useEffect(() => {
+    setWhitelisted(data.whitelisted)
+    if (data.whitelisted) {
+      setFeedback(`Click buy to mint your NFT.`)
+    } else {
+      setFeedback(`You aren't whitelisted.`)
+    }
+  }, [data.whitelisted])
 
   return (
     <s.Screen>

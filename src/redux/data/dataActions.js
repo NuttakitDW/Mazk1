@@ -1,5 +1,6 @@
 // log
 import store from "../store";
+import { getProof } from "./merkleTree";
 
 const fetchDataRequest = () => {
   return {
@@ -21,22 +22,28 @@ const fetchDataFailed = (payload) => {
   };
 };
 
-export const fetchData = () => {
+export const fetchData = (account) => {
   return async (dispatch) => {
     dispatch(fetchDataRequest());
     try {
-      let totalSupply = await store
-        .getState()
-        .blockchain.smartContract.methods.totalSupply()
-        .call();
+      // let totalSupply = await store
+      //   .getState()
+      //   .blockchain.smartContract.methods.totalSupply()
+      //   .call();
       // let cost = await store
       //   .getState()
       //   .blockchain.smartContract.methods.cost()
       //   .call();
 
+      let proof = getProof(account);
+      console.log(proof);
+
       dispatch(
         fetchDataSuccess({
-          totalSupply,
+          totalSupply: 13,
+          proof,
+          whitelisted: proof.length > 0,
+          walletMinted: 0,
           // cost,
         })
       );
