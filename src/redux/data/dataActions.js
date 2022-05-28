@@ -36,13 +36,14 @@ export const fetchData = (account) => {
       //   .call();
 
       let proof = getProof(account);
+      let whitelisted = await store.getState().blockchain.smartContract.methods.checkValidity(proof).call();
       console.log(proof);
 
       dispatch(
         fetchDataSuccess({
           totalSupply: 13,
           proof,
-          whitelisted: proof.length > 0,
+          whitelisted,
           walletMinted: 0,
           // cost,
         })
