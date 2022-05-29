@@ -38,7 +38,7 @@ export const fetchData = (account) => {
       let proof = getProof(account);
       let whitelisted;
       try {
-        whitelisted = await store.getState().blockchain.smartContract.methods.checkValidity(proof).call();
+      whitelisted = await store.getState().blockchain.smartContract.methods.checkValidity(proof).call({ from: account });
       } catch (err) {
         console.error(err);
         whitelisted = false;

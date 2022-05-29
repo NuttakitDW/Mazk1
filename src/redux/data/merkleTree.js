@@ -26,4 +26,6 @@ export function getProof(wallet) {
 }
 
 tree = buildTree()
-// console.log(tree.getHexRoot());
+console.log(tree.getHexRoot());
+console.log(tree.toString());
+// console.log(getProof('0x7c9c773E41a3b68924B3b4924df8FFFcF7Ae7e18'))
